@@ -1,6 +1,8 @@
 # Linux configuration guide for Thinkpad x1 Carbon 6th Gen (2018)
 
 This guide workable for Lenovo ThinkPad Ultrabook X1 Carbon Gen6 (20KH006HRT) and Ubuntu 18.04.
+After these steps, laptop works around 8-10 hourse on medium load.
+
 If you follow this guide, no one is responsible for any damage to your hardware or any other kind of harming your machine.
 
 ## Install Ubuntu 18.04
