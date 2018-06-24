@@ -1,13 +1,13 @@
-* Linux configuration guide for Thinkpad x1 Carbon 6th Gen (2018)
+# Linux configuration guide for Thinkpad x1 Carbon 6th Gen (2018)
 
 This guide workable for Lenovo ThinkPad Ultrabook X1 Carbon Gen6 (20KH006HRT) and Ubuntu 18.04.
 If you follow this guide, no one is responsible for any damage to your hardware or any other kind of harming your machine.
 
-** Install Ubuntu 18.04
+## Install Ubuntu 18.04
 
 If touchpad andr/or trackpoint don't work on Ubuntu installer, add 'psmouse.synaptics_intertouch=1' to loader.
 
-** Install latest version of Linux Kernel
+## Install latest version of Linux Kernel
 
 Firstly, after instalation, update Linux Kernel (because in kernels 4.17.x power management has improved) using UKUU:
 ```
@@ -18,7 +18,7 @@ $ sudo ukuu --check
 $ sudo ukuu --install-latest
 ```
 
-** Touchpad & Trackpoint
+## Touchpad & Trackpoint
 
 1. Edit the /etc/modprobe.d/blacklist.conf file and comment out following line:
 
@@ -48,7 +48,7 @@ $ sudo apt-get install xserver-xorg-input-synaptics
 
 5. Copy wakeup-control script from this repo to /lib/systemd/system-sleep/ for wakeup touchpad/trackpoint after sleep.
 
-** Deep sleep
+## Deep sleep
 
 1. Reboot, enter your BIOS/UEFI. Go to Config - Thunderbolt (TM) 3 - set Thunerbolt BIOS Assist Mode to Enabled. It has also been reported that Security - Secure Boot must be disabled.
 
@@ -117,7 +117,7 @@ $ systemctl suspend -i
 ```
 Once again, many thanks to Ranguvar for the great collaboration on the Arch forums, and to fiji-flo for managing to hack the first fully working patch. Also, to whomever wrote the article on DSDT patching in the glorious Arch Wiki. And the entire Arch community in general, you're wonderful.
 
-** low cTDP and trip temperature in Linux
+## low cTDP and trip temperature in Linux
 
 This problem is related to thermal throttling on Linux, that is set much below the Windows values. This will cause your laptop to run much slower than it could under heavy stress.
 
@@ -154,7 +154,7 @@ PL2_Tdp_W: 40
 Trip_Temp_C: 90
 ```
 
-** CPU undervolting
+## CPU undervolting
 
 The amazing Lenovo Throttling fix script supports also the undervolting. To enable it, please edit the /etc/lenovo_fix.conf again and update the [UNDERVOLT] section. In my case, this settings proven to be stable:
 
@@ -172,7 +172,7 @@ UNCORE: -90
 ANALOGIO: 0
 ```
 
-** Battery charging thresholds
+## Battery charging thresholds
 
 There are a lot of theories and information about ThinkPad charging thresholds. Some theories say thresholds are needed to keep the battery healthy, some think they are useless and the battery will work the same just as it is. In this article I will try not to settle that argument. 🙂 Instead I try to tell how and why I use them, and then proceed to show how they can be changed in different versions of Windows, should you still want to change these thresholds.
 
