@@ -1,0 +1,3 @@
+[submodule "lenovo-throttling-fix"]
+	path = lenovo-throttling-fix
+	url = https://github.com/erpalma/lenovo-throttling-fix.git

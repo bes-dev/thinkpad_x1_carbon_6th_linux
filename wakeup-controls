@@ -1,0 +1,10 @@
+#!/bin/sh
+case $1 in
+  post)
+    sleep 1
+    echo -n none > /sys/devices/platform/i8042/serio1/drvctl
+    echo -n reconnect > /sys/devices/platform/i8042/serio1/drvctl
+    rmmod psmouse
+    modprobe psmouse
+  ;;
+esac
