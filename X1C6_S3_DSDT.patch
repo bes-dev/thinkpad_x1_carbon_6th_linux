@@ -1,5 +1,5 @@
---- dsdt.dsl	2018-03-04 16:00:00.866484238 -0800
-+++ dsdt.dsl	2018-03-04 16:28:07.933272752 -0800
+--- dsdt.dsl	2018-03-03 14:47:12.279105691 +0100
++++ dsdt.dsl	2018-03-03 14:26:30.606427931 +0100
 @@ -18,9 +18,8 @@
   *     Compiler ID      "INTL"
   *     Compiler Version 0x20160527 (538314023)
@@ -31,11 +31,12 @@
      External (_SB_.PCI0.GFX0.AINT, MethodObj)    // 2 Arguments
      External (_SB_.PCI0.GFX0.ALSI, UnknownObj)
      External (_SB_.PCI0.GFX0.CBLV, UnknownObj)
-@@ -71,108 +66,81 @@
+@@ -71,109 +66,81 @@
      External (_SB_.PCI0.HDAS.PS3X, MethodObj)    // 0 Arguments
      External (_SB_.PCI0.HIDW, MethodObj)    // 4 Arguments
      External (_SB_.PCI0.HIWC, MethodObj)    // 1 Arguments
 -    External (_SB_.PCI0.ISP0, DeviceObj)
+-    External (_SB_.PCI0.LPCB.EC__.HKEY.DYTC, MethodObj)    // 1 Arguments
      External (_SB_.PCI0.LPCB.H_EC.XDAT, MethodObj)    // 0 Arguments
      External (_SB_.PCI0.PAUD.PUAM, MethodObj)    // 0 Arguments
 -    External (_SB_.PCI0.PEG0, DeviceObj)
@@ -140,7 +141,7 @@
      External (_SB_.PCI0.RP20.PXSX.WGST, MethodObj)    // 0 Arguments
      External (_SB_.PCI0.RP20.PXSX.WIST, MethodObj)    // 0 Arguments
      External (_SB_.PCI0.SAT0.NVM1.VLPM, UnknownObj)
-@@ -191,16 +159,12 @@
+@@ -192,20 +159,15 @@
      External (_SB_.PCI0.XHC_.RHUB.PS0X, MethodObj)    // 0 Arguments
      External (_SB_.PCI0.XHC_.RHUB.PS2X, MethodObj)    // 0 Arguments
      External (_SB_.PCI0.XHC_.RHUB.PS3X, MethodObj)    // 0 Arguments
@@ -157,10 +158,15 @@
      External (BRTL, UnknownObj)
      External (CFGD, UnknownObj)
      External (DIDX, UnknownObj)
-@@ -213,28 +177,6 @@
+-    External (DX2H, MethodObj)    // 2 Arguments
+     External (GSMI, UnknownObj)
+     External (IGDS, UnknownObj)
+     External (LHIH, UnknownObj)
+@@ -215,29 +177,6 @@
      External (M32L, UnknownObj)
      External (M64B, UnknownObj)
      External (M64L, UnknownObj)
+-    External (MBGS, MethodObj)    // 1 Arguments
 -    External (MMRP, MethodObj)    // 1 Arguments
 -    External (MMTB, MethodObj)    // 1 Arguments
 -    External (ODV0, IntObj)
@@ -186,7 +192,7 @@
      External (PC00, IntObj)
      External (PC01, UnknownObj)
      External (PC02, UnknownObj)
-@@ -253,16 +195,11 @@
+@@ -256,9 +195,6 @@
      External (PC15, UnknownObj)
      External (PTTB, UnknownObj)
      External (SGMD, UnknownObj)
@@ -194,16 +200,29 @@
 -    External (TBTD, MethodObj)    // 1 Arguments
 -    External (TBTF, MethodObj)    // 1 Arguments
  
+     Name (MBUF, Buffer (0x4000){})
+     OperationRegion (MDBR, SystemMemory, 0xAB52C018, 0x00004008)
+@@ -415,9 +351,7 @@
      Name (SS1, 0x00)
      Name (SS2, 0x00)
      Name (SS3, One)
 -    One
      Name (SS4, One)
 -    One
-     OperationRegion (GNVS, SystemMemory, 0x4FF4E000, 0x0767)
+     OperationRegion (GNVS, SystemMemory, 0xAB54E000, 0x0767)
      Field (GNVS, AnyAcc, Lock, Preserve)
      {
-@@ -27548,6 +27485,13 @@
+@@ -13824,8 +13758,7 @@
+                     If ((DerefOf (Arg0 [0x00]) == 0x01))
+                     {
+                         ADBG (Concatenate ("POFF GPIO=", ToHexString (DerefOf (Arg0 [0x02]))))
+-                        \_SB.SGOV (DerefOf (Arg0 [0x02]), (DerefOf (Arg0 [0x03]) ^ 
+-                            0x01))
++                        \_SB.SGOV (DerefOf (Arg0 [0x02]), (DerefOf (Arg0 [0x03]) ^ 0x01))
+                     }
+ 
+                     If ((DerefOf (Arg0 [0x00]) == 0x02))
+@@ -27559,6 +27492,13 @@
          0x00, 
          0x00
      })
@@ -217,3 +236,8 @@
      Name (\_S4, Package (0x04)  // _S4_: S4 System State
      {
          0x06, 
+@@ -34795,4 +34735,3 @@
+         }
+     }
+ }
+-
