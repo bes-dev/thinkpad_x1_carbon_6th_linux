@@ -5,6 +5,11 @@ After these steps, laptop works around 8-10 hourse on medium load.
 
 If you follow this guide, no one is responsible for any damage to your hardware or any other kind of harming your machine.
 
+# Results
+
+As a result of these actions I get power statistic like this:
+![power_statistic](power_statistic.png)
+
 ## Install Ubuntu 18.04
 
 If touchpad andr/or trackpoint don't work on Ubuntu installer, add 'psmouse.synaptics_intertouch=1' to loader.
