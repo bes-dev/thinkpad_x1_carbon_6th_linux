@@ -95,11 +95,23 @@ $ find kernel | cpio -H newc --create > acpi_override
 $ cp acpi_override /boot
 ```
 
-9. We yet have to tell GRUB to load our new DSDT table on boot in its configuration file, usually located in /boot/grub/grub.cfg or something similar. Look out for the GRUB menu entry you're usually booting, and simply add our new image to the initrd line. It should look somewhat like that (if your initrd line contains other elements, leave them as they are and simply add the new ACPI override):
+9. We yet have to tell GRUB to load our new DSDT table on boot in its configuration file. In Ubuntu, to allow this change to persist through kernel updates, you should add this to linux_entry() function initrd call in /etc/grub.d/10_linux:
+
 ```
-initrd   /acpi_override /initramfs-linux.img
+--- 10_linux~	2018-08-07 21:24:52.058669051 +0200
++++ 10_linux	2018-08-07 21:24:07.210436901 +0200
+@@ -198,7 +198,7 @@
+ EOF
+     fi
+     sed "s/^/$submenu_indentation/" << EOF
+-	initrd	${rel_dirname}/${initrd}
++	initrd	/boot/acpi_override  ${rel_dirname}/${initrd}
+ EOF
+   fi
+   sed "s/^/$submenu_indentation/" << EOF
 ```
-Note: You will need to do this again when your distribution updates the kernel and re-writes the GRUB configuration. I'm looking for a more automated approach, but was too lazy to do it so far.
+
+Note: GRUB updates might still overwrite this file (haven't had a GRUB update yet), but maybe it'll help to move this to eg. 11_linux to simply redefine linux_entry() function.
 
 10. Moreover, GRUB needs to boot the kernel with a parameter setting the deep sleep state as default. The best place to do this is /etc/default/grub, since that file is not going to be overwritten when the GRUB config becomes regenerated. Simply add mem_sleep_default=deep to the GRUB_CMDLINE_LINUX_DEFAULT configuration option. It should look somewhat like that:
 
