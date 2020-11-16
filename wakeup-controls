@@ -1,16 +1,20 @@
 #!/bin/sh
 
-TRACKPAD_CTL_OLD="/sys/devices/platform/i8042/serio1/drvctl"
-TRACKPAD_CTL="/sys/bus/serio/devices/serio1/drvctl"
+# TRACKPAD_CTL_OLD="/sys/devices/platform/i8042/serio1/drvctl"
+# TRACKPAD_CTL="/sys/bus/serio/devices/serio1/drvctl"
 
-case $1 in
-pre)
-        ;;
-post)
-    echo -n none > "$TRACKPAD_CTL"
-    sleep 1
-    echo -n reconnect > "$TRACKPAD_CTL"
-#    rmmod psmouse
-#    modprobe psmouse
-  ;;
-esac
+# case $1 in
+# pre)
+#         ;;
+# post)
+#     echo -n none > "$TRACKPAD_CTL"
+#     sleep 1
+#     echo -n reconnect > "$TRACKPAD_CTL"
+#   ;;
+# esac
+
+
+if [[ $1 == post ]]; then
+    modprobe -r psmouse
+    modprobe psmouse
+fi
